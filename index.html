@@ -2,25 +2,32 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>VillaPlatzi</title>
+    <title>FarmCoin</title>
     <link rel="stylesheet" href="styles/style.css">
   </head>
   <body>
-
+    <div id="ganador" class="ganador">
+      <h1 class="titulo">HAS GANADO!!</h1>
+    </div>
     <div class="container">
-      <h1 class="titulo">My Firt Game!!</h1>
+      <div class="left">
+        <h1 class="titulo">FarmCoin</h1>
+        <div class="consola">
+          <canvas id="villaplatzi" class="miCanvas" width="480px" height="480px"></canvas>
+        </div>
+      </div>
 
-      <div class="consola">
-        <canvas id="villaplatzi" class="miCanvas" width="500px" height="500px"></canvas>
+      <div class="right">
+        <h2 class="titulo">Tabla</h2>
+        <div class="conteo_box">
+          <p class="conteo_text"></p>
+        </div>
       </div>
     </div>
-
-
 
     <script src="script/clases.js" charset="utf-8"></script>
     <script src="script/movimiento.js" charset="utf-8"></script>
     <script src="script/index.js" charset="utf-8"></script>
     <script src="script/coins.js" charset="utf-8"></script>
-
   </body>
 </html>

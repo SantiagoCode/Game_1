@@ -5,64 +5,61 @@ var teclas =
   RIGHT: 39,
   DOWN: 40
 };
-var lechon_X = 210;
-var lechon_Y = 210;
+
 var pixels = 40;
+
+// Coordenadas iniciales del lechon
+var lechon_X = 200;
+var lechon_Y = 200;
+
 var lechon = new Animales("lechon", "img/cerdo.png", lechon_X, lechon_Y);
 
-// lechon para navidad
+// Instancia del lechon
 lechon.imagen = new Image();
 lechon.imagen.src = lechon.url;
 
-document.addEventListener("keydown", movimiento);
 
-
-function movimiento(evento)
-{
+// Funciones por el movimiento del personaje principal
+const movimiento = (e) => {
   var caminar = true;
   var operacion;
 
-    switch (evento.keyCode)
-    {
-      case teclas.LEFT:
-        // Left resta en el eje X
-        operacion = "l";
-        lechon_X = lechon_X - pixels;
-        comprobante(caminar, lechon_X, operacion);
-      break;
-      case teclas.UP:
-        // Up resta en el eje Y
-        operacion = "u";
-        lechon_Y = lechon_Y - pixels;
-        comprobante(caminar, lechon_Y, operacion);
-      break;
-      case teclas.RIGHT:
-        // Right suma en el eje X
-        operacion = "r";
-        lechon_X = lechon_X + pixels;
-        comprobante(caminar, lechon_X, operacion);
-      break;
-      case teclas.DOWN:
-        // Down suma en el eje Y
-        operacion = "d";
-        lechon_Y = lechon_Y + pixels;
-        comprobante(caminar, lechon_Y, operacion);
-      break;
-    }
+  switch (e.keyCode)  {
+    case teclas.LEFT:
+      // Left resta en el eje X
+      operacion = "l";
+      lechon_X = lechon_X - pixels;
+      comprobante(caminar, operacion);
+    break;
+    case teclas.UP:
+      // Up resta en el eje Y
+      operacion = "u";
+      lechon_Y = lechon_Y - pixels;
+      comprobante(caminar, operacion);
+    break;
+    case teclas.RIGHT:
+      // Right suma en el eje X
+      operacion = "r";
+      lechon_X = lechon_X + pixels;
+      comprobante(caminar, operacion);
+    break;
+    case teclas.DOWN:
+      // Down suma en el eje Y
+      operacion = "d";
+      lechon_Y = lechon_Y + pixels;
+      comprobante(caminar, operacion);
+    break;
+  }
 }
 
 
-function comprobante(caminar, valor, operacion)
-{
+// Comprueba si la ´posicion hacia la que se mueve esta ocupada o fuera de los limites del canvas
+const comprobante = (caminar, operacion) => {
+  for (var i = 1; i < all_animals.length; i++) {
 
-  for (var i = 0; i < all_animals.length; i++)
-  {
+    if (lechon_X == all_animals[i].posicion_x && lechon_Y == all_animals[i].posicion_y || lechon_X < 0 || lechon_Y < 0 || lechon_X > 420 || lechon_Y > 420)  {
 
-    if (lechon_X == all_animals[i].posicion_x && lechon_Y == all_animals[i].posicion_y || lechon_X < 0 || lechon_Y < 0 || lechon_X > 420 || lechon_Y > 420)
-    {
-
-      switch (operacion)
-      {
+      switch (operacion)  {
         case "l":
           // Left resta en el eje X
           lechon_X = lechon_X + pixels;
@@ -83,11 +80,18 @@ function comprobante(caminar, valor, operacion)
 
       caminar = false;
     }
-  }
+  } 
+  
 
-
-  if (caminar == true)
-  {
-      dibujar();
+  // Comprueba si se aprobo el movimiento del cerdo y llama al renderizado con la modificacion de la posicion
+  if (caminar == true) {
+    if (lechon_X + 40 == coin_coordenadas[0] && lechon_Y + 40 == coin_coordenadas[1]) {
+      new_coin = true;    
+      contador_monedas++;
+    }
+    dibujar();
   }
 }
+
+
+document.addEventListener("keydown", movimiento);

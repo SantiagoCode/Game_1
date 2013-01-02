@@ -1,5 +1,4 @@
-// Esta es nuestra super clase base donde guardaremos el fondo en la posicion 0
-// y luego los animales en las siguientes posiciones
+// Esta es la clase base de cada elemento en el juego
 class Animales
 {
   constructor(nombre, url, x, y)

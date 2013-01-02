@@ -1,8 +1,7 @@
-// FUNCION PRINCIPAL PARA DIBUJAR
-function dibujante(color, xinicial, yinicial, xfinal, yfinal)
-{
+// FUNCION PARA DIBUJAR
+const dibujante = (color, xinicial, yinicial, xfinal, yfinal, grosor = 15) => {
   ctxCanvas.beginPath();
-  ctxCanvas.lineWidth = 15;
+  ctxCanvas.lineWidth = grosor;
   ctxCanvas.strokeStyle = color;
   ctxCanvas.moveTo(xinicial, yinicial);
   ctxCanvas.lineTo(xfinal, yfinal);
@@ -11,44 +10,47 @@ function dibujante(color, xinicial, yinicial, xfinal, yfinal)
   ctxCanvas.closePath();
 }
 
-var x, y;
+let new_coin = true;
+let coin_coordenadas;
+let coin_coordenadas_anteriores;
+let contador_monedas = 0;
+let borde_moneda = 20;
+const caja_conteo = document.querySelector(".conteo_text");
+const objetivo_monedas = 3;
 
-function arreglo()
-{
-
-  do
-  {
-    var paso_libre = true;
-
-    x = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 10;
-    y = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 10;
-
-    for (var i = 0; i < all_animals.length; i++)
-    {
-      if (x == all_animals[i].posicion_x && y == all_animals[i].posicion_y)
-      {
-        paso_libre = false;
-        console.log("FUNCIONO");
-      }
-    }
-  } while (paso_libre == false);
-
-  moneda();
+const farm_coin = () => {
+  
+  if (new_coin) {
+    (contador_monedas !== objetivo_monedas)
+    ? next_coin()
+    : ganador()
+  } else {
+    dibujante("black", coin_coordenadas[0], coin_coordenadas[1], coin_coordenadas[0], coin_coordenadas[1], borde_moneda);
+    dibujante("yellow", coin_coordenadas[0], coin_coordenadas[1], coin_coordenadas[0], coin_coordenadas[1]);
+  }
+  
+  actualizacion_tabla();
 }
 
+const next_coin = () => {
+  coin_coordenadas_anteriores = coin_coordenadas;
 
-var color = "yellow";
+  do {
+    coin_coordenadas = coordenadas_generator();
+  } while (coin_coordenadas[0] == 0 || coin_coordenadas[1] == 0 || coin_coordenadas == coin_coordenadas_anteriores);
 
-function moneda()
-{
-  x = x + 40;
-  y = y + 40;
-
-  dibujante(color, --x, --y, ++x, ++y);
-  dibujante(color, --x, ++y, ++x, --y);
-  dibujante(color, --x, y, ++x, y);
-
-  console.log("coin");
+  new_coin = false;
+  dibujante("black", coin_coordenadas[0], coin_coordenadas[1], coin_coordenadas[0], coin_coordenadas[1], borde_moneda);
+  dibujante("yellow", coin_coordenadas[0], coin_coordenadas[1], coin_coordenadas[0], coin_coordenadas[1]);
 }
 
-// var x = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 10;
+const actualizacion_tabla = () => {
+  caja_conteo.innerHTML = `Monedas Atrapadas: ${contador_monedas}`;
+}
+
+const ganador = () => {
+  document.removeEventListener("keydown", movimiento);
+  setTimeout(function(){
+      document.querySelector("#ganador").classList.add("visible");
+  }, 1000);
+}
