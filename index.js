@@ -10,6 +10,14 @@ var vacas = {
   url: "vaca.png",
   cargado: false
 };
+var pollos = {
+  url: "pollo.png",
+  cargado: false
+};
+var cerdos = {
+  url: "cerdo.png",
+  cargado: false
+};
 
 // fondo o mapa
 fondo.imagen = new Image();
@@ -19,6 +27,14 @@ fondo.imagen.addEventListener("load", cargarFondo);
 vacas.imagen = new Image();
 vacas.imagen.src = vacas.url;
 vacas.imagen.addEventListener("load", cargarVacas);
+// pollos
+pollos.imagen = new Image();
+pollos.imagen.src = pollos.url;
+pollos.imagen.addEventListener("load", cargarPollos);
+// cerdos
+cerdos.imagen = new Image();
+cerdos.imagen.src = cerdos.url;
+cerdos.imagen.addEventListener("load", cargarCerdos);
 
 function cargarFondo()
 {
@@ -32,8 +48,21 @@ function cargarVacas()
   dibujar();
 }
 
-var numero_vacas = aleatorio(5, 2);
+function cargarPollos()
+{
+  pollos.cargado = true;
+  dibujar();
+}
 
+function cargarCerdos()
+{
+  cerdos.cargado = true;
+  dibujar();
+}
+
+var numero_vacas = aleatorio(5, 2);
+var numero_pollos = aleatorio(5, 2);
+var numero_cerdos = aleatorio(5, 2);
 // ESTA ES LA FUNCION QUE HARA TODO EL DIBUJO CADA VEZ QUE UN ELEMENTO CARGUE
 function dibujar()
 {
@@ -47,7 +76,27 @@ function dibujar()
       var y = aleatorio(7, 1) * 60;
       ctxCanvas.drawImage(vacas.imagen, x, y);
 
-      console.log(i, x, y);
+      console.log("vacas " + i, x, y);
+    }
+  }
+  if (pollos.cargado) {
+    for (var i = 1; i <= numero_pollos; i++) {
+      // 420 es el resultado de la anchura del canvas menos el tamaño de los animales. Esto para que no salgan del "margen"
+      var x = aleatorio(7, 1) * 60;
+      var y = aleatorio(7, 1) * 60;
+      ctxCanvas.drawImage(pollos.imagen, x, y);
+
+      console.log("pollos " + i, x, y);
+    }
+  }
+  if (cerdos.cargado) {
+    for (var i = 1; i <= numero_cerdos; i++) {
+      // 420 es el resultado de la anchura del canvas menos el tamaño de los animales. Esto para que no salgan del "margen"
+      var x = aleatorio(7, 1) * 60;
+      var y = aleatorio(7, 1) * 60;
+      ctxCanvas.drawImage(cerdos.imagen, x, y);
+
+      console.log("cerdos " + i, x, y);
     }
   }
 }
