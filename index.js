@@ -1,6 +1,7 @@
 var miCanvas = document.getElementById("villaplatzi");
 var ctxCanvas= miCanvas.getContext("2d");
 
+
 // ESTOS SON LOS OBJETOS LITERALES QUE CONTIENEN LAS IMAGENES DEL FONDO Y LOS ANIMALES
 var fondo = {
   url: "tile.png",
@@ -19,6 +20,7 @@ var cerdos = {
   cargado: false
 };
 
+
 // fondo o mapa
 fondo.imagen = new Image();
 fondo.imagen.src = fondo.url;
@@ -35,6 +37,7 @@ pollos.imagen.addEventListener("load", cargarPollos);
 cerdos.imagen = new Image();
 cerdos.imagen.src = cerdos.url;
 cerdos.imagen.addEventListener("load", cargarCerdos);
+
 
 function cargarFondo()
 {
@@ -60,9 +63,11 @@ function cargarCerdos()
   dibujar();
 }
 
+
 var numero_vacas = aleatorio(5, 2);
 var numero_pollos = aleatorio(5, 2);
 var numero_cerdos = aleatorio(5, 2);
+
 // ESTA ES LA FUNCION QUE HARA TODO EL DIBUJO CADA VEZ QUE UN ELEMENTO CARGUE
 function dibujar()
 {
@@ -75,8 +80,6 @@ function dibujar()
       var x = aleatorio(7, 1) * 60;
       var y = aleatorio(7, 1) * 60;
       ctxCanvas.drawImage(vacas.imagen, x, y);
-
-      console.log("vacas " + i, x, y);
     }
   }
   if (pollos.cargado) {
@@ -85,8 +88,6 @@ function dibujar()
       var x = aleatorio(7, 1) * 60;
       var y = aleatorio(7, 1) * 60;
       ctxCanvas.drawImage(pollos.imagen, x, y);
-
-      console.log("pollos " + i, x, y);
     }
   }
   if (cerdos.cargado) {
@@ -95,9 +96,10 @@ function dibujar()
       var x = aleatorio(7, 1) * 60;
       var y = aleatorio(7, 1) * 60;
       ctxCanvas.drawImage(cerdos.imagen, x, y);
-
-      console.log("cerdos " + i, x, y);
     }
+  }
+  if (lechon.cargado) {
+    ctxCanvas.drawImage(lechon.imagen, lechon_X, lechon_Y);
   }
 }
 
