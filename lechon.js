@@ -6,32 +6,17 @@ var teclas = {
   DOWN: 40
 };
 
-// Cerdo PlumeRose
-var lechon = {
-  url: "cerdo.png",
-  cargado: false
-};
+var lechon_X = 210;
+var lechon_Y = 210;
+var pixels = 30;
+
+var lechon = new Animales("lechon", "cerdo.png", lechon_X, lechon_Y);
 
 // lechon para navidad
 lechon.imagen = new Image();
 lechon.imagen.src = lechon.url;
-lechon.imagen.addEventListener("load", cargarLechon);
+lechon.imagen.addEventListener("load", mover_lechon);
 
-function cargarLechon()
-{
-  lechon.cargado = true;
-  dibujar();
-}
-
-
-// LA FUNCION DIBUJAR() CON EL CONDICIONAL QUE COMPRUEBA
-// QUE YA CARGO LA IMAGEN QUE DIBUJA AL LECHON ESTA EN EL INDEX.JS
-
-
-// ACA EMPIEZA EL TRABAJO PARA EL MOVIMIENTO DEL CERDO ESPECIAL PARA NAVIDAD
-var lechon_X = 210;
-var lechon_Y = 210;
-var pixels = 30;
 
 function calcular(evento)
 {
@@ -55,11 +40,10 @@ function calcular(evento)
     break;
   }
 
-  moverLechon();
+  mover_lechon();
 }
 
-function moverLechon()
+function mover_lechon()
 {
-  dibujar();
-  ctxCanvas.drawImage(lechon.imagen, lechon_X, lechon_Y);
+  imprimir();
 }
