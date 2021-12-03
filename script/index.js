@@ -1,12 +1,15 @@
 // aqui guardamos los animales para despues
 var all_animals = [];
+// ubicaiones de animales para poder hacer comparaciones de posicion
+var ubicaciones_x = [];
+var ubicaciones_y = [];
 // Aca conseguimos el contexto del canvas
 var miCanvas = document.getElementById("villaplatzi");
 var ctxCanvas= miCanvas.getContext("2d");
 
-var maximo_cuadricula = 6;
+var maximo_cuadricula = 11;
 var minimo_cuadricula = 0;
-var multiplicador_cuadricula = 80;
+var multiplicador_cuadricula = 40;
 
 var maximo_animales = 8;
 var minimo_animales = 2;
@@ -47,26 +50,29 @@ function cuantos_animales()
 
 function ubicar_animales(nombre, url)
 {
-  var x = aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula;
-  var y = aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula;
+  var x = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 20;
+  var y = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 20;
 
-  if (x == 0)
+  // Asi marcamos los margenes maximos en x y y
+  if (x >= 400)
   {
-    x = x + 20;
+    x = 420;
   }
-  if (y == 0)
+  if (y >= 400)
   {
-    y =  +20;
+    y = 420;
+  }
+  if (x == 220 && y == 220)
+  {
+    x = x + 80;
+    y = y + 80;
   }
 
-  if (x > 420)
-  {
-    x = x - 60;
-  }
-  if (y > 420)
-  {
-    y = y - 60
-  }
+  var ubicacion_x = x;
+  ubicaciones_x.push( ubicacion_x );
+
+  var ubicacion_y = y;
+  ubicaciones_y.push( ubicacion_y );
 
   all_animals.push( new Animales(nombre, url, x, y) );
 }
