@@ -4,6 +4,13 @@ var all_animals = [];
 var miCanvas = document.getElementById("villaplatzi");
 var ctxCanvas= miCanvas.getContext("2d");
 
+var maximo_cuadricula = 6;
+var minimo_cuadricula = 0;
+var multiplicador_cuadricula = 80;
+
+var maximo_animales = 8;
+var minimo_animales = 2;
+
 // Con esta funcion (cuantos_animales) que llama la ventana al cargarse crearemos
 // los animales dentro del arry all_animals, cada uno con su respectiva ubicacion
 // particular, su nombre y url que luego sera usada como src del objeto Image
@@ -16,39 +23,59 @@ function cuantos_animales()
   cargar_fondo();
 
   // calculemos cuantas vacas
-  var cantidad_vacas = aleatorio(8, 1);
+  var cantidad_vacas = aleatorio(maximo_animales, minimo_animales);
   for (var i = 1; i <= cantidad_vacas; i++)
   {
-    var x = aleatorio(7, 1) * 60;
-    var y = aleatorio(7, 1) * 60;
-    all_animals.push( new Animales("vaca", "vaca.png", x, y) );
+    ubicar_animales("vaca", "img/vaca.png");
   }
   // calculemos cuantas cerdos
-  var cantidad_cerdos = aleatorio(8, 1);
+  var cantidad_cerdos = aleatorio(maximo_animales, minimo_animales);
   for (var i = 1; i <= cantidad_cerdos; i++)
   {
-    var x = aleatorio(7, 1) * 60;
-    var y = aleatorio(7, 1) * 60;
-    all_animals.push( new Animales("cerdo", "cerdo.png", x, y) );
+    ubicar_animales("cerdo", "img/cerdo.png");
   }
   // calculemos cuantas vacas
-  var cantidad_pollos = aleatorio(8, 1);
+  var cantidad_pollos = aleatorio(maximo_animales, minimo_animales);
   for (var i = 1; i <= cantidad_pollos; i++)
   {
-    var x = aleatorio(7, 1) * 60;
-    var y = aleatorio(7, 1) * 60;
-    all_animals.push( new Animales("pollo", "pollo.png", x, y) );
+    ubicar_animales("pollo", "img/pollo.png");
   }
 
 
   cargar_imagenes();
 }
 
+function ubicar_animales(nombre, url)
+{
+  var x = aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula;
+  var y = aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula;
+
+  if (x == 0)
+  {
+    x = x + 20;
+  }
+  if (y == 0)
+  {
+    y =  +20;
+  }
+
+  if (x > 420)
+  {
+    x = x - 60;
+  }
+  if (y > 420)
+  {
+    y = y - 60
+  }
+
+  all_animals.push( new Animales(nombre, url, x, y) );
+}
+
 // Con cargar_fondo que se llama al inicio de la function cuantos_animales, agragamos
 // el fondo en la posicion 0 ( all_animals[0] )
 function cargar_fondo()
 {
-  all_animals.push( new Animales("Fondo", "tile.png", 0, 0) );
+  all_animals.push( new Animales("Fondo", "img/tile.png", 0, 0) );
 }
 
 // Con esta funcion que se dispara al final de la function cuantos_animales,

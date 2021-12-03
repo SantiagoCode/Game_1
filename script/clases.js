@@ -10,3 +10,4 @@ class Animales
     this.posicion_y = y;
   }
 }
+  

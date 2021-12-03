@@ -7,8 +7,8 @@ var teclas =
 };
 var lechon_X = 210;
 var lechon_Y = 210;
-var pixels = 30;
-var lechon = new Animales("lechon", "cerdo.png", lechon_X, lechon_Y);
+var pixels = 80;
+var lechon = new Animales("lechon", "img/cerdo.png", lechon_X, lechon_Y);
 
 // lechon para navidad
 lechon.imagen = new Image();
@@ -46,11 +46,6 @@ function movimiento(evento)
   }
 
   if (caminar == true) {
-      mover_lechon();
+    dibujar();
   }
-}
-
-function mover_lechon()
-{
-  dibujar();
 }
