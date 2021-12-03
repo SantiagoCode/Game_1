@@ -14,6 +14,11 @@ var multiplicador_cuadricula = 40;
 var maximo_animales = 8;
 var minimo_animales = 2;
 
+var segundos = 15;
+setInterval(() => {
+  cuantos_animales();
+}, segundos * 1000)
+
 // Con esta funcion (cuantos_animales) que llama la ventana al cargarse crearemos
 // los animales dentro del arry all_animals, cada uno con su respectiva ubicacion
 // particular, su nombre y url que luego sera usada como src del objeto Image
@@ -21,6 +26,11 @@ window.addEventListener("load", cuantos_animales);
 
 function cuantos_animales()
 {
+  // Asi reiniciamos los arrays de ubicacion para que las ubicaiones no queden
+  // guardadas cuando vuelvan a cargar las ubicaciones de los animales
+  // y asi el lechon se pueda mover por los sitios donde estaban los otros animales
+  ubicaciones_x = [];
+  ubicaciones_y = [];
   // Segun el orden del array primero va el fondo para que sea lo primero
   // en dibujarse y asi todos los animales se dibujen sobre este
   cargar_fondo();
