@@ -10,14 +10,3 @@ class Animales
     this.posicion_y = y;
   }
 }
-
-class coin
-{
-  constructor(moneda, url, x, y) 
-  {
-      this.moneda = moneda;
-      this.url = url;
-      this.posicion_x = x;
-      this.posicion_y = y;
-  }
-}

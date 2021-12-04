@@ -5,8 +5,8 @@ var teclas =
   RIGHT: 39,
   DOWN: 40
 };
-var lechon_X = 220;
-var lechon_Y = 220;
+var lechon_X = 210;
+var lechon_Y = 210;
 var pixels = 40;
 var lechon = new Animales("lechon", "img/cerdo.png", lechon_X, lechon_Y);
 
@@ -51,12 +51,16 @@ function movimiento(evento)
     }
 }
 
+
 function comprobante(caminar, valor, operacion)
 {
-  for (var i = 0; i < ubicaciones_x.length; i++)
+
+  for (var i = 0; i < all_animals.length; i++)
   {
-    if (lechon_X == ubicaciones_x[i] && lechon_Y == ubicaciones_y[i] || lechon_X < 0 || lechon_Y < 0 || lechon_X > 420 || lechon_Y > 420)
+
+    if (lechon_X == all_animals[i].posicion_x && lechon_Y == all_animals[i].posicion_y || lechon_X < 0 || lechon_Y < 0 || lechon_X > 420 || lechon_Y > 420)
     {
+
       switch (operacion)
       {
         case "l":
@@ -78,9 +82,9 @@ function comprobante(caminar, valor, operacion)
       }
 
       caminar = false;
-
     }
   }
+
 
   if (caminar == true)
   {

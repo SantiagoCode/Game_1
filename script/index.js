@@ -1,23 +1,23 @@
 // aqui guardamos los animales para despues
 var all_animals = [];
-// ubicaiones de animales para poder hacer comparaciones de posicion
-var ubicaciones_x = [];
-var ubicaciones_y = [];
 // Aca conseguimos el contexto del canvas
 var miCanvas = document.getElementById("villaplatzi");
 var ctxCanvas= miCanvas.getContext("2d");
 
-var maximo_cuadricula = 11;
+var maximo_cuadricula = 5;
 var minimo_cuadricula = 0;
-var multiplicador_cuadricula = 40;
+var multiplicador_cuadricula = 80;
 
 var maximo_animales = 8;
 var minimo_animales = 2;
 
-var segundos = 15;
+var segundos = 10;
+
 setInterval(() => {
   cuantos_animales();
 }, segundos * 1000)
+
+
 
 // Con esta funcion (cuantos_animales) que llama la ventana al cargarse crearemos
 // los animales dentro del arry all_animals, cada uno con su respectiva ubicacion
@@ -29,8 +29,8 @@ function cuantos_animales()
   // Asi reiniciamos los arrays de ubicacion para que las ubicaiones no queden
   // guardadas cuando vuelvan a cargar las ubicaciones de los animales
   // y asi el lechon se pueda mover por los sitios donde estaban los otros animales
-  ubicaciones_x = [];
-  ubicaciones_y = [];
+  all_animals = [];
+
   // Segun el orden del array primero va el fondo para que sea lo primero
   // en dibujarse y asi todos los animales se dibujen sobre este
   cargar_fondo();
@@ -54,38 +54,18 @@ function cuantos_animales()
     ubicar_animales("pollo", "img/pollo.png");
   }
 
-
   cargar_imagenes();
 }
 
+
 function ubicar_animales(nombre, url)
 {
-  var x = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 20;
-  var y = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 20;
-
-  // Asi marcamos los margenes maximos en x y y
-  if (x >= 400)
-  {
-    x = 420;
-  }
-  if (y >= 400)
-  {
-    y = 420;
-  }
-  if (x == 220 && y == 220)
-  {
-    x = x + 80;
-    y = y + 80;
-  }
-
-  var ubicacion_x = x;
-  ubicaciones_x.push( ubicacion_x );
-
-  var ubicacion_y = y;
-  ubicaciones_y.push( ubicacion_y );
+  var x = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 10;
+  var y = ( aleatorio(maximo_cuadricula, minimo_cuadricula) * multiplicador_cuadricula ) + 10;
 
   all_animals.push( new Animales(nombre, url, x, y) );
 }
+
 
 // Con cargar_fondo que se llama al inicio de la function cuantos_animales, agragamos
 // el fondo en la posicion 0 ( all_animals[0] )
@@ -111,12 +91,18 @@ function cargar_imagenes()
 // iniciando con el fondo hasta el ultimo animal y luego el Lechon caminante
 function dibujar()
 {
+  // dibujamos el Fondo y los Animales
   for (var i = 0; i < all_animals.length; i++)
   {
     ctxCanvas.drawImage(all_animals[i].imagen, all_animals[i].posicion_x, all_animals[i].posicion_y);
   }
 
+  // Dibujamos el lechon
   ctxCanvas.drawImage(lechon.imagen, lechon_X, lechon_Y);
+
+  // Dibujmos la moneda
+  moneda();
+
 }
 
 // Esta funcion devulve un numero random segun el margen dado en el parametro
